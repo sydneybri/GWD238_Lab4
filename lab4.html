@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sydney Carter's Lab 4</title>
+
+<style>
+
+	#main a{
+		font: 1.5em/1.2 "Trebuchet MS", Arial, Helvetica, sans-serif;
+		color: #FB69AA;
+		margin: .5em;
+	}
+	
+	#pic{
+		width: 250px;
+		height: 300px;
+	}
+	
+	#caption{
+	}
+
+</style>
+
+</head>
+
+<body>
+
+	<nav id="main">
+        <a href ="images/kitty1.jpg" title="Hello Kitty is ready to roam around town.">Hello Kitty One</a>
+        <a href ="images/kitty2.jpg" title="Hello Kitty is ready for her costume party.">Hello Kitty Two</a>
+        <a href ="images/kitty3.jpg" title="Hello Kitty is ready to defend her friends.">Hello Kitty Three</a>
+    </nav>
+    
+    <img id="pic" src="images/kitty1.jpg" alt="Hello Kitty image" />
+    
+    <p id="caption"> Hello Kitty is ready to roam around town. </p>
+
+	<script>
+	
+		window.onload= init;
+		
+		//First thing we need to do is attach event handlers to links for functionality of gallery
+		function init(e)
+		{
+			var links = document.querySelectorAll("#main a");
+			
+			//Collect all anchor tags in nav
+			for(var i = 0; i < links.length; i++)
+			{
+				//Add event handlers onto each anchor tag
+				links[i].onclick = changePic;
+			}
+		}
+		
+		//Function runs when anchor tag (link) clicked by user
+		function changePic(e)
+		{
+			var pic = document.querySelector("#pic");
+			var caption = document.querySelector("#caption");
+			//Prevents HTML element's default behavior
+			e.preventDefault();
+			//Change picture
+			pic.src = e.target.href;
+			//Change caption
+			caption.firstChild.nodeValue = e.target.title;
+		}
+	
+	</script>
+
+</body>
+</html>
