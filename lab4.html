@@ -12,12 +12,25 @@
 		margin: .5em;
 	}
 	
+	#albums a{
+		font: 1.5em/1.2 "Trebuchet MS", Arial, Helvetica, sans-serif;
+		color: #666;
+		margin: .5em;
+	}
+	
 	#pic{
 		width: 250px;
 		height: 300px;
 	}
 	
 	#caption{
+		font: 1em/.8 "Trebuchet MS", Arial, Helvetica, sans-serif;
+		color: #000;
+		margin: .5em;
+	}
+	
+	.hide{
+		display: none;
 	}
 
 </style>
@@ -26,10 +39,32 @@
 
 <body>
 
+	<nav id="albums">
+    <!--Using in-page anchors for album nav-->
+    	<a href ="#album1" title="Hello Kitty">Hello Kitty</a>
+        <a href ="#album2" title="Badtz Maru">Badtz Maru</a>
+        <a href ="#album3" title="Chococat">Chococat</a>
+    
+    </nav>
+
 	<nav id="main">
-        <a href ="images/kitty1.jpg" title="Hello Kitty is ready to roam around town.">Hello Kitty One</a>
-        <a href ="images/kitty2.jpg" title="Hello Kitty is ready for her costume party.">Hello Kitty Two</a>
-        <a href ="images/kitty3.jpg" title="Hello Kitty is ready to defend her friends.">Hello Kitty Three</a>
+    	<div id="album1">
+            <a href ="images/kitty1.jpg" title="Hello Kitty is ready to roam around town.">Hello Kitty One</a>
+            <a href ="images/kitty2.jpg" title="Hello Kitty is ready for her costume party.">Hello Kitty Two</a>
+            <a href ="images/kitty3.jpg" title="Hello Kitty is ready to defend her friends.">Hello Kitty Three</a>
+        </div>
+        
+        <div id="album2">
+            <a href ="images/maru1.jpg" title="Hello Kitty is ready to roam around town.">Hello Kitty One</a>
+            <a href ="images/maru2.jpg" title="Hello Kitty is ready for her costume party.">Hello Kitty Two</a>
+            <a href ="images/maru3.jpg" title="Hello Kitty is ready to defend her friends.">Hello Kitty Three</a>
+        </div>
+        
+        <div id="album3">
+            <a href ="images/cat1.jpg" title="Hello Kitty is ready to roam around town.">Hello Kitty One</a>
+            <a href ="images/cat2.jpg" title="Hello Kitty is ready for her costume party.">Hello Kitty Two</a>
+            <a href ="images/cat3.jpg" title="Hello Kitty is ready to defend her friends.">Hello Kitty Three</a>
+        </div>
     </nav>
     
     <img id="pic" src="images/kitty1.jpg" alt="Hello Kitty image" />
@@ -52,6 +87,23 @@
 					//Add event handlers onto each anchor tag
 					links[i].onclick = gallery.changePic;
 				}
+				
+				//Set-up links in albums nav
+				var albums = document.querySelectorAll("#albums a");
+				
+				for(var j = 0; j < albums.length; j++)
+				{
+					albums[j].onclick = gallery.changeAlbum;
+				}
+				
+				//Hide all album links
+				var divs = document.querySelectorAll("#main div");
+				for(var k = 0; k < divs.length; k++)
+				{
+					divs[k].classList.add("hide");
+				}
+				
+				divs[0].classList.remove("hide");
 			},
 			
 			//Function runs when anchor tag (link) clicked by user
@@ -65,6 +117,22 @@
 				pic.src = e.target.href;
 				//Change caption
 				caption.firstChild.nodeValue = e.target.title;
+			},
+			
+			changeAlbum: function(e)
+			{
+				var divs = document.querySelectorAll("#main div");
+				//Prevents HTML element's default behavior
+				e.preventDefault();
+				//Hide all albums
+				for(var i = 0; i < divs.length; i++)
+				{
+					divs[i].classList.add("hide");
+				}
+				//Reveal first album
+				//div = e.target.href;
+				
+				
 			}
 		}
 		
